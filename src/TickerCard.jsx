@@ -83,7 +83,9 @@ const TickerCard = ({ ticker }) => {
         }`}
       >
         {currencyMarker}
-        {currentPrice.toFixed(2)}
+        {isKoreanStock
+          ? currentPrice.toLocaleString()
+          : currentPrice.toFixed(2)}
       </div>
 
       <div
@@ -91,11 +93,15 @@ const TickerCard = ({ ticker }) => {
           isPositive ? 'text-green-700' : 'text-red-700'
         }`}
       >
-        {isPositive ? '▲' : '▼'} {priceChange.toFixed(2)}
+        {isPositive ? '▲' : '▼'}
+        {isKoreanStock ? priceChange.toLocaleString() : priceChange.toFixed(2)}
       </div>
 
       <div className="mt-4 text-sm text-gray-500">
-        전일 종가: ${previousClose.toFixed(2)}
+        전일 종가: {currencyMarker}
+        {isKoreanStock
+          ? previousClose.toLocaleString()
+          : previousClose.toFixed(2)}
       </div>
     </div>
   );
